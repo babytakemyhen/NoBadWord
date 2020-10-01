@@ -1,12 +1,12 @@
 {
-  "name": "whatsapp-bot-nobadword",
+  "name": "whatsapp-bot-gangomongkasarye",
   "version": "1.0.0",
-  "description": "Whatsapp Bot - No Bad Word",
+  "description": "Whatsapp Bot - ga ngomong kasar",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Dandy Raka",
+  "author": "D4ndiy R4k4",
   "repository": {
     "type": "git",
     "url": "https://github.com/dandyraka/NoBadWord.git"
