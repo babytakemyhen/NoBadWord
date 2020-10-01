@@ -5,4 +5,4 @@ const chalk = require('chalk')
  * @param  {String} color
  * @return  {String} Return text with color
  */
-module.exports = color = (text, color) => !color ? chalk.green(text) : chalk.keyword(color)(text)
+module.exports = color = (text, color) => !color ? chalk.yellow(text) : chalk.keyword(color)(text)
