@@ -8,7 +8,7 @@ const FileSync = require('lowdb/adapters/FileSync')
 const db_group = new FileSync(appRoot+'/data/group.json')
 const db = low(db_group)
 
-moment.tz.setDefault('Asia/Jakarta').locale('id')
+moment.tz.setDefault('Indonesia/Tangsel').locale('id')
 db.defaults({ group: []}).write()
 
 function formatin(duit){
@@ -58,8 +58,8 @@ module.exports = msgHandler = async (client, message) => {
             case 'about':
                 const about = 
                 '*ABOUT*\n'+
-                'Bot ini dikembangkan oleh *Dandy - JNCK Media*\n'+
-                'Terima kasih juga untuk *Yoga Sakti* dan *Open-WA*';
+                'Bot ini dikembangkan oleh *mr. D4ndiy - JNCK Media*\n'+
+                'Terima kasih juga untuk *Y0g4 S4ktiy* dan *Open-WA*';
                 await client.sendText(from, about)
                 break
             case 'reset':
@@ -80,7 +80,7 @@ module.exports = msgHandler = async (client, message) => {
                 if(isGroupMsg){
                     const klasemen = db.get('group').filter({id: groupId}).map('members').value()[0]
                     let urut = Object.entries(klasemen).map(([key, val]) => ({id: key, ...val})).sort((a, b) => b.denda - a.denda);
-                    let textKlas = "*Klasemen Denda Sementara*\n"
+                    let textKlas = "*Klasemen Denda *\n"
                     let i = 1;
                     urut.forEach((klsmn) => {
                         textKlas += i+". @"+klsmn.id.replace('@c.us', '')+" ➤ Rp"+formatin(klsmn.denda)+"\n"
@@ -104,7 +104,7 @@ module.exports = msgHandler = async (client, message) => {
                     if(isKasar){
                         const denda = db.get('group').filter({id: groupId}).map('members['+isIn+']').find({ id: pengirim }).update('denda', n => n + 5000).write()
                         if(denda){
-                            await client.reply(from, "Jangan badword bodoh\nDenda +5.000\nTotal : Rp"+formatin(denda.denda), id)
+                            await client.reply(from, "Yang Ngomong Kasar\nDenda +5.000\nTotal : Rp"+formatin(denda.denda), id)
                         }
                     }
                 } else {
@@ -119,7 +119,7 @@ module.exports = msgHandler = async (client, message) => {
                         const cekuser = db.get('group').filter({id: groupId}).map('members').value()[0]
                         if(isKasar){
                             cekuser.push({id: pengirim, denda: 5000})
-                            await client.reply(from, "Jangan badword bodoh\nDenda +5.000", id)
+                            await client.reply(from, "Yang Ngomong kasar\nDenda +5.000", id)
                         } else {
                             cekuser.push({id: pengirim, denda: 0})
                         }
@@ -129,7 +129,7 @@ module.exports = msgHandler = async (client, message) => {
             } else {
                 if(isKasar){
                     db.get('group').push({ id: groupId, members: [{id: pengirim, denda: 5000}] }).write()
-                    await client.reply(from, "Jangan badword bodoh\nDenda +5.000\nTotal : Rp5.000", id)
+                    await client.reply(from, "Yang Ngomong Kasar\nDenda +5.000\nTotal : Rp5.000", id)
                 } else {
                     db.get('group').push({ id: groupId, members: [{id: pengirim, denda: 0}] }).write()
                 }
